@@ -17,9 +17,14 @@ class HelloAPITests(TestCase):
             response.json()['course'],
             'CSC325'
         )
+        self.assertEqual(
+            response.json()['version'],
+            '2.0'
+        )
 
     def test_hello_api_rejects_post_requests(self):
         response = self.client.post(reverse('hello_api'))
 
         self.assertEqual(response.status_code, 405)
         self.assertIn('GET', response.headers['Allow'])
+
